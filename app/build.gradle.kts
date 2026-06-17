@@ -61,12 +61,12 @@ android {
     
     signingConfigs {
         getByName("debug") {
-            if (System.getenv("MUSIC_DEBUG_SIGNING_STORE_PASSWORD") != null) {
-                storeFile = file(System.getenv("MUSIC_DEBUG_KEYSTORE_FILE"))
-                storePassword = System.getenv("MUSIC_DEBUG_SIGNING_STORE_PASSWORD")
-                keyAlias = "debug"
-                keyPassword = System.getenv("MUSIC_DEBUG_SIGNING_KEY_PASSWORD")
-            }
+            // 🚀 FIXED: করাপ্টেড জেকেএস ফাইল বাইপাস করে গিটহাব রানারের স্ট্যান্ডার্ড ডেবাগ কী ফোর্স করা হলো
+            val userHome = System.getProperty("user.home")
+            storeFile = file("$userHome/.android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
         }
     }
     buildFeatures {
